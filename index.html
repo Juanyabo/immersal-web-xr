@@ -274,13 +274,7 @@
     let directional = new THREE.DirectionalLight(0xffff00, 5);
     directional.position.set(-1, 1, 0);
     scene.add(directional);
-
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-    const cube = new THREE.Mesh(geometry, material);
-
-    cube.position.set(0, 0, -2); // colócalo delante de la cámara
-    scene.add(cube);
+    
   }
 
   function updateContent() {
