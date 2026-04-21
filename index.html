@@ -104,7 +104,7 @@
   permButton.addEventListener("click", function(e) {
     createOrientationSensor().then(() => {
       permButton.style.visibility = "hidden";
-      text.style.display = "block";
+      //text.style.display = "block";
       init();
     });
   });
@@ -114,11 +114,11 @@
       immersal.localizeDeviceAsync()
       .then(result => {
         console.log(`[IMMERSAL] On-device localization result:`, result);
-        text.textContent = `[IMMERSAL] On-device localization result: ${JSON.stringify(result)}`;
+        //text.textContent = `[IMMERSAL] On-device localization result: ${JSON.stringify(result)}`;
       })
       .catch(e => {
         console.log(e);
-        text.textContent = `Error: ${e}`;
+        //text.textContent = `Error: ${e}`;
       });
     }
   });
@@ -223,14 +223,14 @@
       }
       geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
-      const material = new THREE.PointsMaterial({ color: 0xFFFF00, vertexColors: THREE.VertexColors, size: 4, sizeAttenuation: false } );
+      const material = new THREE.PointsMaterial({ color: 0xFFFF00, vertexColors: THREE.VertexColors, size: 4, sizeAttenuation: false, transparent: true, opacity: 0.0} );
 
       pointCloud = new THREE.Points(geometry, material);
       pointCloud.scale.set(1, 1, 1);
       scene.add(pointCloud);
       plyLoaded = true;
       console.log(`PLY loaded`);
-      text.textContent = "PLY loaded";
+      //text.textContent = "PLY loaded";
     });
   }
 
@@ -253,7 +253,7 @@
           var action = mixer.clipAction(gltf.animations[0]);
           action.play();
 
-          scene.add(logo);
+          //scene.add(logo);
           renderer.render(scene, camera);
 
           contentLoaded = true;
@@ -268,6 +268,13 @@
     let directional = new THREE.DirectionalLight(0xffff00, 5);
     directional.position.set(-1, 1, 0);
     scene.add(directional);
+
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+    const cube = new THREE.Mesh(geometry, material);
+
+    cube.position.set(0, 0, -2); // colócalo delante de la cámara
+    scene.add(cube);
   }
 
   function updateContent() {
