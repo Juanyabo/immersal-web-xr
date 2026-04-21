@@ -158,7 +158,7 @@
       immersal.localizeDevice(timestamp);
     }
 
-    if (immersal.localization.counter > 1) {
+    if (immersal.localization.counter > 1 && !cubeAdded) {
       camera.fov = immersal.getVFov();
       camera.updateProjectionMatrix();
 
@@ -198,18 +198,15 @@
 
       //console.log(`latitude: ${wgs84.latitude}, longitude: ${wgs84.longitude}, altitude: ${wgs84.altitude}`);
 
-      if(!cubeAdded) {
-        const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-        const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-        const cube = new THREE.Mesh(geometry, material);
+      const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+      const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+      const cube = new THREE.Mesh(geometry, material);
 
-        // MISMO espacio que el logo (clave)
-        cube.position.set(0, 0, 0);
+      cube.position.set(position[0], position[1], position[2]);
 
-        scene.add(cube);
+      scene.add(cube);
 
-        cubeAdded = true;
-      }
+      cubeAdded = true;
     }
 
     updateContent();
